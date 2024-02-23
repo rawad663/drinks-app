@@ -11,7 +11,7 @@ function App() {
 
 	const fetchDrinks = async () => {
 		try {
-			const response = await fetch('https://jsonplaceholder.typicode.com/drinks');
+			const response = await fetch('https://jsonplaceholder.typicode.com/posts');
 
 			if (!response.ok) {
 				throw new Error('Failed to fetch drinks');
@@ -41,6 +41,11 @@ function App() {
     }, 1000)
 	}, []);
 
+	const handleLoadMore = () => {
+		// Simulate an error thrown by the server
+		throw new Error('Unable to fetch more drinks')
+	}
+
 
 	return (
 		<div className="App">
@@ -60,7 +65,7 @@ function App() {
 				}
 			</div>
 
-      <button>Load more</button>
+      <button onClick={handleLoadMore}>Load more</button>
 		</div>
 	);
 }
