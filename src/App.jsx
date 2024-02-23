@@ -3,24 +3,24 @@ import './App.css';
 import { Banner } from './components/Banner';
 
 function App() {
-	const [posts, setPosts] = useState([]);
+	const [drinks, setDrinks] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
   const [bannerContent, setBannerContent] = useState(null);
 
-	const fetchPosts = async () => {
+	const fetchDrinks = async () => {
 		try {
-			const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+			const response = await fetch('https://jsonplaceholder.typicode.com/drinks');
 
 			if (!response.ok) {
-				throw new Error('Failed to fetch posts');
+				throw new Error('Failed to fetch drinks');
 			}
 
 			const data = await response.json();
 
 			setTimeout(() => {
-				setPosts(data.slice(0, 4));
+				setDrinks(data.slice(0, 4));
 			}, 500);
 		} catch (error) {
 			setError(error.message);
@@ -30,7 +30,7 @@ function App() {
 	};
 
 	useEffect(() => {
-		fetchPosts();
+		fetchDrinks();
 
     // Simulate API call to fetch banner info
     setTimeout(() => {
@@ -45,13 +45,13 @@ function App() {
 	return (
 		<div className="App">
       {bannerContent && <Banner {...bannerContent} />}
-			<h1>Posts</h1>
+			<h1>Drinks</h1>
 
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
 
 			<div className="post-list">
-				{posts.map(post => (
+				{drinks.map(post => (
 					<div key={post.id} className="post">
 						<h2>{post.title}</h2>
 						<p>{post.body}</p>
