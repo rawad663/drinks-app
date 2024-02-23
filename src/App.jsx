@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Banner } from './components/Banner';
-import { Skeleton } from './components/Skeleton/Skeleton';
 
 function App() {
 	const [posts, setPosts] = useState([]);
@@ -52,13 +51,13 @@ function App() {
 			{error && <p>Error: {error}</p>}
 
 			<div className="post-list">
-				{posts.length ? posts.map(post => (
+				{posts.map(post => (
 					<div key={post.id} className="post">
 						<h2>{post.title}</h2>
 						<p>{post.body}</p>
 					</div>
 				))
-			: [1,2,3, 4].map(() => <Skeleton width={300} height={300} style={{ margin: 10 }} />)}
+				}
 			</div>
 
       <button>Load more</button>
