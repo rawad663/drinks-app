@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Banner } from './components/Banner';
+import { Skeleton } from './components/Skeleton/Skeleton';
 
 function App() {
 	const [drinks, setDrinks] = useState([]);
@@ -49,13 +50,14 @@ function App() {
 
 	return (
 		<div className="App">
-      {bannerContent && <Banner {...bannerContent} />}
+      {!bannerContent? <Skeleton width={"100%"} height={"100px"}/> :<Banner {...bannerContent} />}
 			<h1>Drinks</h1>
 
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
 
 			<div className="post-list">
+				{!drinks? <Skeleton/> : <>
 				{drinks.map(post => (
 					<div key={post.id} className="post">
 						<h2>{post.title}</h2>
@@ -63,6 +65,7 @@ function App() {
 					</div>
 				))
 				}
+			</>}
 			</div>
 
       <button onClick={handleLoadMore}>Load more</button>
